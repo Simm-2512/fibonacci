@@ -1,0 +1,75 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+   <form class="form-horizontal" method="POST">
+       {% csrf_token %}
+        <div class="form-group">
+            <div class="col-sm-6">
+                <input type="number" class="form-control" name="fibonacci_number" placeholder="Enter number" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4">
+                <button class="btn btn-primary col-sm-4" type="submit">Find</button>
+            </div>
+        </div>
+    </form>
+
+
+<!--{% if time_taken_direct %}-->
+<!--<h4>Time Taken Direct Method: {{ time_taken_direct }}</h4>-->
+<!--{% endif %}-->
+{% if message1 %}
+    <div class="alert alert-danger col-sm-8">
+        {{ message1 }}
+    </div>
+{% endif %}
+{% if message %}
+    <div class="alert alert-success col-sm-8">
+      {{ message }}
+        <br>
+        {% if total_time_taken %}
+            Total Time Taken : {{ total_time_taken }}
+        <br>
+        {% endif %}
+        {% if time_taken_mat %}
+            Time Taken Compute Matrix Multiplication: {{ time_taken_mat }}
+        {% endif %}
+    </div>
+
+{% endif %}
+
+
+
+
+{% if fibonacci_value and fibonacci_number %}
+
+    <div class="alert alert-info col-sm-8">
+        <div>
+
+                {% with a=fibonacci_number %}
+                    {% if a == '1' %}
+                         1<sup>st</sup> term of Fibonacci series
+                    {% elif a == '2' %}
+                         2<sup>nd</sup> term of Fibonacci series
+                    {% elif a == '3' %}
+                         3<sup>rd</sup> term of Fibonacci series
+                    {% else %}
+                         {{ a }}<sup>th</sup> term of Fibonacci series
+                    {% endif %}
+
+                {% endwith %}
+
+            <button class="btn btn-outline-info btn-sm" script="float: right;" onclick="copyFunction()">Copy text</button>
+        </div>
+
+          <h5 style="word-wrap: break-word;" id="fibonacci_value">{{ fibonacci_value }}</h5>
+    </div>
+{% endif %}
+
+{% endblock content %}
+
+{% block extra_js %}
+
+{% endblock extra_js%}
+
